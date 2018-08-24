@@ -1,0 +1,16 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
+
+#define COL 80 //numero de colunas
+#define LIN 20 //numero de linhas
+
+char quadro[LIN][COL]; //variavel global q sera utilizada como quadro
+
+void iniciaQuadro();
+void criaFigura(int slct, int qtd);
+int desenhaAsterisco(int i, int j);
+int desenhaSoma(int i, int j);
+int desenhaX(int i, int j);
+int desenhaJogoDaVelha(int i, int j);
+void imprime();
