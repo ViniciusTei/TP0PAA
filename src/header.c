@@ -19,6 +19,14 @@ void iniciaQuadro(){
   }
 }
 
+/*
+ * Metedo define o posicionamento da figura escolhida
+ * e chama o metodo responsavel por verificar a posicao
+ * e desenhar a figura no quadro
+ * Params:
+ *  slct: tipo de figura selecionada pelo usuario
+ *  qtd: quatidade e figuras selecionadas pelo usuario
+ */
 void criaFigura(int slct, int qtd){
     int i, j;
     int numFiguras = 0;
@@ -184,7 +192,8 @@ int desenhaJogoDaVelha(int i, int j){
     if (quadro[i][j] != '-' && quadro[i][j] != '|'
         && quadro[i][j+1] != '|' && quadro[i][j+1] != '+'
         && quadro[i+1][j] != '-' && quadro[i+1][j] != '+'
-        && quadro[i+1][j+1] != '-' && quadro[i+1][j+1] != '|' && quadro[i+1][j+1] != '+'){
+        && quadro[i+1][j+1] != '-' && quadro[i+1][j+1] != '|' 
+        && quadro[i+1][j+1] != '+') {
 
             quadro[i][j] = '+';
             quadro[i][j+1] = '+';
@@ -196,7 +205,6 @@ int desenhaJogoDaVelha(int i, int j){
     return 0;
 }
 
-/**/
 void imprime(){
     int i, j;
 

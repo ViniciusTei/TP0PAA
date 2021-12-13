@@ -2,10 +2,10 @@
 #include <stdio.h>
 #include <time.h>
 
-#define COL 80 //numero de colunas
-#define LIN 20 //numero de linhas
+#define COL 80 //numero de colunas do quadro
+#define LIN 20 //numero de linhas do quadro
 
-char quadro[LIN][COL]; //variavel global q sera utilizada como quadro
+char quadro[LIN][COL]; // variavel global q sera utilizada como quadro
 
 void iniciaQuadro();
 void criaFigura(int slct, int qtd);
