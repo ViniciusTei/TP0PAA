@@ -16,6 +16,7 @@ int main(){
       printf("3. Letra X com asteriscos.\n");
       printf("4. Figuras aleatorias\n");
       printf("5. Jogo da velha\n");
+      printf("6. Piramide\n");
       printf("Digite o tipo de figura desejada: ");
       scanf("%d", &slct);
       printf("Digite a quantidade de figuras (menor ou igual a zero para aleatorio): ");

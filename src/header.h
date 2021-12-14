@@ -13,4 +13,6 @@ int desenhaAsterisco(int i, int j);
 int desenhaSoma(int i, int j);
 int desenhaX(int i, int j);
 int desenhaJogoDaVelha(int i, int j);
+int desenhaPiramide(int x, int y);
+int checaChars(int i, int j);
 void imprime();
