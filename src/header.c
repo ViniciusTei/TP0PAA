@@ -161,33 +161,16 @@ void criaFigura(int slct, int qtd){
 }
 
 int desenhaAsterisco(int i, int j){
-    if (quadro[i][j] != BORDA_SUPINF && quadro[i][j] != BORDA_LATERAL
-        && quadro[i][j+1] != ASTERISCO && quadro[i][j-1] != ASTERISCO
-        && quadro[i+1][j] != ASTERISCO && quadro[i-1][j] != ASTERISCO
-        && quadro[i-1][j+1] != ASTERISCO && quadro[i+1][j-1] != ASTERISCO
-        && quadro[i+1][j+1] != ASTERISCO && quadro[i-1][j-1] != ASTERISCO){
-
+    if (verificaPosicoes(i, j))  {
         quadro[i][j] = ASTERISCO;
         return 1;
     }
+
     return 0;
 }
 
 int desenhaSoma(int i, int j){
-    if (quadro[i][j] != BORDA_SUPINF && quadro[i][j] != BORDA_LATERAL
-        && quadro[i+1][j] != BORDA_LATERAL && quadro[i-1][j] != BORDA_LATERAL
-        && quadro[i+1][j] != BORDA_SUPINF && quadro[i-1][j] != BORDA_SUPINF
-        && quadro[i][j+1] != BORDA_SUPINF && quadro[i][j-1] != BORDA_SUPINF
-        && quadro[i][j+1] != BORDA_LATERAL && quadro[i][j-1] != BORDA_LATERAL
-        && quadro[i][j+1] != ASTERISCO && quadro[i][j-1] != ASTERISCO
-        && quadro[i+1][j] != ASTERISCO && quadro[i-1][j] != ASTERISCO
-        && quadro[i-1][j-1] != BORDA_LATERAL && quadro[i-1][j+1] != BORDA_LATERAL
-        && quadro[i-1][j-1] != BORDA_SUPINF && quadro[i-1][j+1] != BORDA_SUPINF
-        && quadro[i+1][j+1] != BORDA_SUPINF && quadro[i+1][j-1] != BORDA_SUPINF
-        && quadro[i-1][j+1] != BORDA_LATERAL && quadro[i-1][j-1] != BORDA_LATERAL
-        && quadro[i-1][j+1] != ASTERISCO && quadro[i+1][j-1] != ASTERISCO
-        && quadro[i+1][j+1] != ASTERISCO && quadro[i-1][j-1] != ASTERISCO){
-
+    if (verificaPosicoes(i, j))  {
         quadro[i][j] = ASTERISCO;
         quadro[i+1][j] = ASTERISCO;
         quadro[i-1][j] = ASTERISCO;
@@ -196,23 +179,12 @@ int desenhaSoma(int i, int j){
 
         return 1;
     }
+
     return 0;
 }
 
 int desenhaX(int i, int j){
-    if (quadro[i][j] != BORDA_SUPINF && quadro[i][j] != BORDA_LATERAL
-        && quadro[i-1][j-1] != BORDA_LATERAL && quadro[i-1][j+1] != BORDA_LATERAL
-        && quadro[i-1][j-1] != BORDA_SUPINF && quadro[i-1][j+1] != BORDA_SUPINF
-        && quadro[i+1][j+1] != BORDA_SUPINF && quadro[i+1][j-1] != BORDA_SUPINF
-        && quadro[i-1][j+1] != BORDA_LATERAL && quadro[i-1][j-1] != BORDA_LATERAL
-        && quadro[i-1][j+1] != ASTERISCO && quadro[i+1][j-1] != ASTERISCO
-        && quadro[i+1][j+1] != ASTERISCO && quadro[i-1][j-1] != ASTERISCO
-        && quadro[i+1][j] != BORDA_LATERAL && quadro[i-1][j] != BORDA_LATERAL
-        && quadro[i+1][j] != BORDA_SUPINF && quadro[i-1][j] != BORDA_SUPINF
-        && quadro[i][j+1] != BORDA_SUPINF && quadro[i][j-1] != BORDA_SUPINF
-        && quadro[i][j+1] != BORDA_LATERAL && quadro[i][j-1] != BORDA_LATERAL
-        && quadro[i][j+1] != ASTERISCO && quadro[i][j-1] != ASTERISCO
-        && quadro[i+1][j] != ASTERISCO && quadro[i-1][j] != ASTERISCO){
+    if (verificaPosicoes(i, j))  {
 
         quadro[i][j] = ASTERISCO;
         quadro[i+1][j-1] = ASTERISCO;
@@ -227,11 +199,7 @@ int desenhaX(int i, int j){
 
 int desenhaJogoDaVelha(int i, int j){
 
-    if (quadro[i][j] != BORDA_SUPINF && quadro[i][j] != BORDA_LATERAL
-        && quadro[i][j+1] != BORDA_LATERAL && quadro[i][j+1] != CRUZ
-        && quadro[i+1][j] != BORDA_SUPINF && quadro[i+1][j] != CRUZ
-        && quadro[i+1][j+1] != BORDA_SUPINF && quadro[i+1][j+1] != BORDA_LATERAL 
-        && quadro[i+1][j+1] != CRUZ) {
+    if (verificaPosicoes(i, j)) {
 
             quadro[i][j] = CRUZ;
             quadro[i][j+1] = CRUZ;
@@ -287,16 +255,37 @@ int desenhaPiramide(int x, int y) {
    return isFreeToDraw;
 }
 
+/*
+    Verifica na posicoes ao redor de um ponto se
+    podemos escrever nela.
+    i: linha
+    j: coluna
+*/
+int verificaPosicoes(int i, int j) {
+    if (checaChars(i, j) &&
+        checaChars(i + 1, j) &&
+        checaChars(i + 1, j + 1) &&
+        checaChars(i + 1, j - 1) &&
+        checaChars(i - 1, j) &&
+        checaChars(i - 1, j + 1) &&
+        checaChars(i - 1, j - 1)    
+    ) {
+        return 1;
+    }
+    return 0;
+}
+
+/*
+    Dada uma posicao verifica se o caractere daquela
+    posicao pode ser escrito, ou seja, eh igual a vazio
+    i: linha
+    j: coluna
+*/
 int checaChars(int i, int j) {
 
-    if (quadro[i][j] != BORDA_SUPINF &&
-        quadro[i][j] != BORDA_LATERAL &&
-        quadro[i][j] != CRUZ &&
-        quadro[i][j] != ASTERISCO
-        ) {
-            
-            return 1;
-        }
+    if (quadro[i][j] == ' ') {
+        return 1;
+    }
 
     return 0;
 }

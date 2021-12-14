@@ -15,4 +15,5 @@ int desenhaX(int i, int j);
 int desenhaJogoDaVelha(int i, int j);
 int desenhaPiramide(int x, int y);
 int checaChars(int i, int j);
+int verificaPosicoes(int i, int j);
 void imprime();
