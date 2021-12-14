@@ -15,9 +15,9 @@ void iniciaQuadro(){
   for(i = 0; i < LIN; i++){
     for(j = 0; j < COL; j++){
       if (i == 0 || i == LIN - 1) {
-          quadro[i][j] = '-';
+          quadro[i][j] = BORDA_SUPINF;
       } else if ((j == 0 || j == COL - 1) && (i != 0 || i != LIN - 1)) {
-          quadro[i][j] = '|';
+          quadro[i][j] = BORDA_LATERAL;
       } else {
           quadro[i][j] = ' ';
       }
@@ -136,7 +136,7 @@ void criaFigura(int slct, int qtd){
         }while(numPir < qtdPir);
         break;
         case 5:
-        //Jogo da velha com '+'
+        //Jogo da velha com CRUZ
         do {
             i = rand() % (LIN-1);
             j = rand() % (COL-1);
@@ -161,38 +161,38 @@ void criaFigura(int slct, int qtd){
 }
 
 int desenhaAsterisco(int i, int j){
-    if (quadro[i][j] != '-' && quadro[i][j] != '|'
-        && quadro[i][j+1] != '*' && quadro[i][j-1] != '*'
-        && quadro[i+1][j] != '*' && quadro[i-1][j] != '*'
-        && quadro[i-1][j+1] != '*' && quadro[i+1][j-1] != '*'
-        && quadro[i+1][j+1] != '*' && quadro[i-1][j-1] != '*'){
+    if (quadro[i][j] != BORDA_SUPINF && quadro[i][j] != BORDA_LATERAL
+        && quadro[i][j+1] != ASTERISCO && quadro[i][j-1] != ASTERISCO
+        && quadro[i+1][j] != ASTERISCO && quadro[i-1][j] != ASTERISCO
+        && quadro[i-1][j+1] != ASTERISCO && quadro[i+1][j-1] != ASTERISCO
+        && quadro[i+1][j+1] != ASTERISCO && quadro[i-1][j-1] != ASTERISCO){
 
-        quadro[i][j] = '*';
+        quadro[i][j] = ASTERISCO;
         return 1;
     }
     return 0;
 }
 
 int desenhaSoma(int i, int j){
-    if (quadro[i][j] != '-' && quadro[i][j] != '|'
-        && quadro[i+1][j] != '|' && quadro[i-1][j] != '|'
-        && quadro[i+1][j] != '-' && quadro[i-1][j] != '-'
-        && quadro[i][j+1] != '-' && quadro[i][j-1] != '-'
-        && quadro[i][j+1] != '|' && quadro[i][j-1] != '|'
-        && quadro[i][j+1] != '*' && quadro[i][j-1] != '*'
-        && quadro[i+1][j] != '*' && quadro[i-1][j] != '*'
-        && quadro[i-1][j-1] != '|' && quadro[i-1][j+1] != '|'
-        && quadro[i-1][j-1] != '-' && quadro[i-1][j+1] != '-'
-        && quadro[i+1][j+1] != '-' && quadro[i+1][j-1] != '-'
-        && quadro[i-1][j+1] != '|' && quadro[i-1][j-1] != '|'
-        && quadro[i-1][j+1] != '*' && quadro[i+1][j-1] != '*'
-        && quadro[i+1][j+1] != '*' && quadro[i-1][j-1] != '*'){
+    if (quadro[i][j] != BORDA_SUPINF && quadro[i][j] != BORDA_LATERAL
+        && quadro[i+1][j] != BORDA_LATERAL && quadro[i-1][j] != BORDA_LATERAL
+        && quadro[i+1][j] != BORDA_SUPINF && quadro[i-1][j] != BORDA_SUPINF
+        && quadro[i][j+1] != BORDA_SUPINF && quadro[i][j-1] != BORDA_SUPINF
+        && quadro[i][j+1] != BORDA_LATERAL && quadro[i][j-1] != BORDA_LATERAL
+        && quadro[i][j+1] != ASTERISCO && quadro[i][j-1] != ASTERISCO
+        && quadro[i+1][j] != ASTERISCO && quadro[i-1][j] != ASTERISCO
+        && quadro[i-1][j-1] != BORDA_LATERAL && quadro[i-1][j+1] != BORDA_LATERAL
+        && quadro[i-1][j-1] != BORDA_SUPINF && quadro[i-1][j+1] != BORDA_SUPINF
+        && quadro[i+1][j+1] != BORDA_SUPINF && quadro[i+1][j-1] != BORDA_SUPINF
+        && quadro[i-1][j+1] != BORDA_LATERAL && quadro[i-1][j-1] != BORDA_LATERAL
+        && quadro[i-1][j+1] != ASTERISCO && quadro[i+1][j-1] != ASTERISCO
+        && quadro[i+1][j+1] != ASTERISCO && quadro[i-1][j-1] != ASTERISCO){
 
-        quadro[i][j] = '*';
-        quadro[i+1][j] = '*';
-        quadro[i-1][j] = '*';
-        quadro[i][j+1] = '*';
-        quadro[i][j-1] = '*';
+        quadro[i][j] = ASTERISCO;
+        quadro[i+1][j] = ASTERISCO;
+        quadro[i-1][j] = ASTERISCO;
+        quadro[i][j+1] = ASTERISCO;
+        quadro[i][j-1] = ASTERISCO;
 
         return 1;
     }
@@ -200,25 +200,25 @@ int desenhaSoma(int i, int j){
 }
 
 int desenhaX(int i, int j){
-    if (quadro[i][j] != '-' && quadro[i][j] != '|'
-        && quadro[i-1][j-1] != '|' && quadro[i-1][j+1] != '|'
-        && quadro[i-1][j-1] != '-' && quadro[i-1][j+1] != '-'
-        && quadro[i+1][j+1] != '-' && quadro[i+1][j-1] != '-'
-        && quadro[i-1][j+1] != '|' && quadro[i-1][j-1] != '|'
-        && quadro[i-1][j+1] != '*' && quadro[i+1][j-1] != '*'
-        && quadro[i+1][j+1] != '*' && quadro[i-1][j-1] != '*'
-        && quadro[i+1][j] != '|' && quadro[i-1][j] != '|'
-        && quadro[i+1][j] != '-' && quadro[i-1][j] != '-'
-        && quadro[i][j+1] != '-' && quadro[i][j-1] != '-'
-        && quadro[i][j+1] != '|' && quadro[i][j-1] != '|'
-        && quadro[i][j+1] != '*' && quadro[i][j-1] != '*'
-        && quadro[i+1][j] != '*' && quadro[i-1][j] != '*'){
+    if (quadro[i][j] != BORDA_SUPINF && quadro[i][j] != BORDA_LATERAL
+        && quadro[i-1][j-1] != BORDA_LATERAL && quadro[i-1][j+1] != BORDA_LATERAL
+        && quadro[i-1][j-1] != BORDA_SUPINF && quadro[i-1][j+1] != BORDA_SUPINF
+        && quadro[i+1][j+1] != BORDA_SUPINF && quadro[i+1][j-1] != BORDA_SUPINF
+        && quadro[i-1][j+1] != BORDA_LATERAL && quadro[i-1][j-1] != BORDA_LATERAL
+        && quadro[i-1][j+1] != ASTERISCO && quadro[i+1][j-1] != ASTERISCO
+        && quadro[i+1][j+1] != ASTERISCO && quadro[i-1][j-1] != ASTERISCO
+        && quadro[i+1][j] != BORDA_LATERAL && quadro[i-1][j] != BORDA_LATERAL
+        && quadro[i+1][j] != BORDA_SUPINF && quadro[i-1][j] != BORDA_SUPINF
+        && quadro[i][j+1] != BORDA_SUPINF && quadro[i][j-1] != BORDA_SUPINF
+        && quadro[i][j+1] != BORDA_LATERAL && quadro[i][j-1] != BORDA_LATERAL
+        && quadro[i][j+1] != ASTERISCO && quadro[i][j-1] != ASTERISCO
+        && quadro[i+1][j] != ASTERISCO && quadro[i-1][j] != ASTERISCO){
 
-        quadro[i][j] = '*';
-        quadro[i+1][j-1] = '*';
-        quadro[i-1][j+1] = '*';
-        quadro[i+1][j+1] = '*';
-        quadro[i-1][j-1] = '*';
+        quadro[i][j] = ASTERISCO;
+        quadro[i+1][j-1] = ASTERISCO;
+        quadro[i-1][j+1] = ASTERISCO;
+        quadro[i+1][j+1] = ASTERISCO;
+        quadro[i-1][j-1] = ASTERISCO;
 
         return 1;
     }
@@ -227,16 +227,16 @@ int desenhaX(int i, int j){
 
 int desenhaJogoDaVelha(int i, int j){
 
-    if (quadro[i][j] != '-' && quadro[i][j] != '|'
-        && quadro[i][j+1] != '|' && quadro[i][j+1] != '+'
-        && quadro[i+1][j] != '-' && quadro[i+1][j] != '+'
-        && quadro[i+1][j+1] != '-' && quadro[i+1][j+1] != '|' 
-        && quadro[i+1][j+1] != '+') {
+    if (quadro[i][j] != BORDA_SUPINF && quadro[i][j] != BORDA_LATERAL
+        && quadro[i][j+1] != BORDA_LATERAL && quadro[i][j+1] != CRUZ
+        && quadro[i+1][j] != BORDA_SUPINF && quadro[i+1][j] != CRUZ
+        && quadro[i+1][j+1] != BORDA_SUPINF && quadro[i+1][j+1] != BORDA_LATERAL 
+        && quadro[i+1][j+1] != CRUZ) {
 
-            quadro[i][j] = '+';
-            quadro[i][j+1] = '+';
-            quadro[i+1][j] = '+';
-            quadro[i+1][j+1] = '+';
+            quadro[i][j] = CRUZ;
+            quadro[i][j+1] = CRUZ;
+            quadro[i+1][j] = CRUZ;
+            quadro[i+1][j+1] = CRUZ;
 
             return 1;
         }
