@@ -227,14 +227,14 @@ int desenhaPiramide(int x, int y) {
     for (int i = x; i < posMaxX; i+=1) {
         for (int j = y; j < posMaxY; j+=1) {
             if(checaChars(i, j) == 1) {
-                isFreeToDraw = 1;
-            } else {
-                isFreeToDraw = 0;
-            }
+                isFreeToDraw += 1;
+            } 
         }
     }
 
-    if (isFreeToDraw) {
+    const int isFree = isFreeToDraw == 15;
+
+    if (isFree) {
         for (int i = x; i < posMaxX; i+=1) {
             for (int j = y; j < posMaxY; j+=1) {
                 if (i == x) { // desenha a primeira linha da piramide
@@ -252,7 +252,7 @@ int desenhaPiramide(int x, int y) {
         }
     }
 
-   return isFreeToDraw;
+   return isFree;
 }
 
 /*
